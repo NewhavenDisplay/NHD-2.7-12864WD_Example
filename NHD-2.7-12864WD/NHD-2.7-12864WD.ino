@@ -1,23 +1,22 @@
-/*
-/ Program for writing to NHD-2.7-12864 OLED with SSD1322 controller with Serial Interface
-/ This code is written for the Arduino Mega 2560 using Serial Interface
-/
-/ Newhaven Display invests time and resources providing this open source code,
-/ Please support Newhaven Display by purchasing products from Newhaven Display!
-
-* Copyright (c) 2022, Newhaven Display International
-*
-* This code is provided as an example only and without any warranty by Newhaven Display.
-* Newhaven Display accepts no responsibility for any issues resulting from its use.
-* The developer of the final application incorporating any parts of this
-* sample code is responsible for ensuring its safe and correct operation
-* and for any consequences resulting from its use.
-* See the GNU General Public License for more details.
-*
-* Use Horizontal Orientation when converting BMP to hex code to 
-* display custom image using LCD assistant.
-*/
-//---------------------------------------------------------
+/**
+ * Program for writing to NHD-2.7-12864 OLED with SSD1322 controller with Serial Interface
+ * This code is written for the Arduino Mega 2560 using Serial Interface
+ *
+ * Newhaven Display invests time and resources providing this open source code,
+ * Please support Newhaven Display by purchasing products from Newhaven Display!
+ *
+ * Copyright (c) 2022, Newhaven Display International
+ *
+ * This code is provided as an example only and without any warranty by Newhaven Display.
+ * Newhaven Display accepts no responsibility for any issues resulting from its use.
+ * The developer of the final application incorporating any parts of this
+ * sample code is responsible for ensuring its safe and correct operation
+ * and for any consequences resulting from its use.
+ * See the GNU General Public License for more details.
+ *
+ * Use Horizontal Orientation when converting BMP to hex code to 
+ * display custom image using LCD assistant.
+ */
 
 #define OLED_DC 4    // Register Select signal
 #define OLED_RESET 3 // Reset signal
@@ -26,7 +25,7 @@
 #define OLED_MOSI 6  // Serial data signal  //PB2 on Arduino Mega
 
 /****************************************************
- *               Hex Table for Image Pic             *
+ *               Hex Table for Image Pic             
  *****************************************************/
 
 unsigned char NHD_Logo[] = {
@@ -86,7 +85,7 @@ unsigned char NHD_Logo[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 /****************************************************
- *                 Function Commands                  *
+ *                 Function Commands                  
  *****************************************************/
 
 // Data Output Serial Interface
@@ -140,7 +139,7 @@ void command(unsigned char d)
 }
 
 /****************************************************
- *                 Display Commands                   *
+ *                 Display Commands                   
  *****************************************************/
 
 void Set_Column_Address_12864(unsigned char a, unsigned char b)
