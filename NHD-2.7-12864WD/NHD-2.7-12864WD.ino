@@ -19,11 +19,11 @@
 //---------------------------------------------------------
 
 
-#define OLED_DC    49    //Register Select signal
-#define OLED_RESET 48    //Reset signal
-#define OLED_CS    47    //Chip select signal
-#define OLED_CLK   52    //Serial clock signal //PB1 on Arduino Mega
-#define OLED_MOSI  51    //Serial data signal  //PB2 on Arduino Mega
+#define OLED_DC    4    //Register Select signal
+#define OLED_RESET 3    //Reset signal
+#define OLED_CS    5    //Chip select signal
+#define OLED_CLK   7    //Serial clock signal //PB1 on Arduino Mega
+#define OLED_MOSI  6    //Serial data signal  //PB2 on Arduino Mega
 
 /****************************************************
 *               Hex Table for Image Pic             *
@@ -97,20 +97,19 @@ void data(unsigned char d) //Data Output Serial Interface
   digitalWrite(OLED_DC, HIGH); 
   for(n=0;n<8;n++){
     if((d&0x80)==0x80)
-    PORTB |=(1<< PORTB2);  //digitalWrite(OLED_MOSI, HIGH);
+    digitalWrite(OLED_MOSI, HIGH);
     else
-    PORTB &= ~(1<<PORTB2); //digitalWrite(OLED_MOSI, LOW);
-    while(0);
+    digitalWrite(OLED_MOSI, LOW);
+    __builtin_avr_delay_cycles(1);
     d=(d<<1);
-    PORTB &= ~(1<<PORTB1); //digitalWrite(OLED_CLK, LOW);
-    while(0);
-    PORTB |=(1<< PORTB1);  //digitalWrite(OLED_CLK, HIGH);
-    while(0);
-    PORTB &= ~(1<<PORTB1); //digitalWrite(OLED_CLK, LOW); 
+    digitalWrite(OLED_CLK, LOW);
+    __builtin_avr_delay_cycles(1);
+    digitalWrite(OLED_CLK, HIGH);
+    __builtin_avr_delay_cycles(1);
+    digitalWrite(OLED_CLK, LOW); 
     }
   digitalWrite(OLED_CS, HIGH);
 }
-
 
 void command(unsigned char d) //Command Output Serial Interface
 {
@@ -119,16 +118,16 @@ void command(unsigned char d) //Command Output Serial Interface
   digitalWrite(OLED_DC, LOW); 
   for(n=0;n<8;n++){
     if((d&0x80)==0x80)
-    PORTB |=(1<< PORTB2);  //digitalWrite(OLED_MOSI, HIGH);
+    digitalWrite(OLED_MOSI, HIGH);
     else
-    PORTB &= ~(1<<PORTB2); //digitalWrite(OLED_MOSI, LOW);
-    while(0);
+    digitalWrite(OLED_MOSI, LOW);
+    __builtin_avr_delay_cycles(1);
     d=(d<<1);
-    PORTB &= ~(1<<PORTB1); //digitalWrite(OLED_CLK, LOW);
-    while(0);
-    PORTB |=(1<< PORTB1);  //digitalWrite(OLED_CLK, HIGH);
-    while(0);
-    PORTB &= ~(1<<PORTB1); //digitalWrite(OLED_CLK, LOW);
+    digitalWrite(OLED_CLK, LOW);
+    __builtin_avr_delay_cycles(1);
+    digitalWrite(OLED_CLK, HIGH);
+    __builtin_avr_delay_cycles(1);
+    digitalWrite(OLED_CLK, LOW);
     }
   digitalWrite(OLED_CS, HIGH);
 }
@@ -496,9 +495,8 @@ void OLED_Init_12864()
 
 void setup()
 {
-  DDRB |= (1<<DDB1);  //Enable CLK as Output
-  DDRB |= (1<<DDB2);  //Enable MOSI as Output
-  
+  pinMode(OLED_CLK, OUTPUT);
+  pinMode(OLED_MOSI, OUTPUT);
   pinMode(OLED_DC, OUTPUT);
   pinMode(OLED_RESET, OUTPUT);
   pinMode(OLED_CS, OUTPUT);
@@ -531,5 +529,4 @@ void loop() {
   command(0xA6);
   ClearPixel_12864();  
   delay(250);
-    
 }
