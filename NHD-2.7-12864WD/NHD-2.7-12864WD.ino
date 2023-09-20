@@ -88,6 +88,8 @@ unsigned char NHD_Logo[] = {
  *                 Function Commands                  
  *****************************************************/
 
+
+
 // Data Output Serial Interface
 void data(unsigned char d) 
 {
@@ -102,12 +104,12 @@ void data(unsigned char d)
     } else {
       digitalWrite(OLED_MOSI, LOW);
     }
-    __builtin_avr_delay_cycles(1);
+    __asm__("nop");
     d = (d << 1);
     digitalWrite(OLED_CLK, LOW);
-    __builtin_avr_delay_cycles(1);
+    __asm__("nop");
     digitalWrite(OLED_CLK, HIGH);
-    __builtin_avr_delay_cycles(1);
+    __asm__("nop");
     digitalWrite(OLED_CLK, LOW);
   }
   digitalWrite(OLED_CS, HIGH);
@@ -127,12 +129,12 @@ void command(unsigned char d)
     } else {
       digitalWrite(OLED_MOSI, LOW);
     }
-    __builtin_avr_delay_cycles(1);
+    __asm__("nop");
     d = (d << 1);
     digitalWrite(OLED_CLK, LOW);
-    __builtin_avr_delay_cycles(1);
+    __asm__("nop");
     digitalWrite(OLED_CLK, HIGH);
-    __builtin_avr_delay_cycles(1);
+    __asm__("nop");
     digitalWrite(OLED_CLK, LOW);
   }
   digitalWrite(OLED_CS, HIGH);
